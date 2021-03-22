@@ -1,9 +1,14 @@
 import pandas as pd
+from flask import Flask, jsonify
+
+
+app = Flask(__name__)
 
 
 # https://qiita.com/nkmk/items/8b291ba019ee33429f1b
 # https://stopcovid19.metro.tokyo.lg.jp/cards/monitoring-number-of-confirmed-cases/
 # https://catalog.data.metro.tokyo.lg.jp/dataset/t000010d0000000068
+@app.route('/display', methods=['GET'])
 def get_tokyo_covid19_patients_csv():
     url = 'https://stopcovid19.metro.tokyo.lg.jp/data/130001_tokyo_covid19_patients.csv'
     df = pd.read_csv(filepath_or_buffer=url)
@@ -84,12 +89,21 @@ def get_tokyo_covid19_patients_csv():
     if compare_mean_seven < 0:
         plus = ''
 
-    print(df['date'].iloc[-1].strftime('%Y/%m/%d'))
-    print('新規陽性者数：' + str(s_total_re.iloc[-1]) + '人')
+    day = df['date'].iloc[-1].strftime('%Y/%m/%d')
+    new_number = s_total_re.iloc[-1]
+    print(day)
+    print('新規陽性者数：' + str(new_number) + '人')
     print('7日間移動平均：' + '{:.2f}'.format(last_mean_seven) + '人'
           + '（前日比：' + plus + '{:.2f}'.format(compare_mean_seven) + '人）')
     print(graph)
+    result = {
+        'text': day + '現在\n' +'新規陽性者数：' + str(new_number) + '人\n' + '7日間移動平均：' + '{:.2f}'.format(last_mean_seven)
+                + '人' + '（前日比：' + plus + '{:.2f}'.format(compare_mean_seven) + '人）\n\n' + '![](' + graph + ')' + '\n\n',
+        'display': 1,
+    }
+    return jsonify(result)
 
 
 if __name__ == '__main__':
-    get_tokyo_covid19_patients_csv()
+    app.run()
+    # get_tokyo_covid19_patients_csv()
