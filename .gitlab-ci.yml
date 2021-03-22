@@ -13,7 +13,7 @@ variables:
   DEPLOY_DEV_BRANCH: dev
   KUSTOMIZE_DEV_PATH: overlays/development/
   KUSTOMIZE_PROD_PATH: overlays/production/
-  DOCKER_HOST: tcp://localhost:2375
+  DOCKER_HOST: tcp://localhost:2376
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
   KUSTOMIZE_GIT_TAG: 3.5.4
