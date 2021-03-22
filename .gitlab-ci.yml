@@ -1,8 +1,8 @@
 # https://blog.callr.tech/building-docker-images-with-gitlab-ci-best-practices/
-image: docker:19.03.15
+image: docker:20.10.5
 
 services:
-  - name: docker:19.03.15-dind
+  - name: docker:20.10.5-dind
     command: ["--insecure-registry=harbor.neko.flab.fujitsu.co.jp:9000"]
 
 variables:
