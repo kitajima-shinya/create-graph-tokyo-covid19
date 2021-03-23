@@ -97,8 +97,8 @@ def get_tokyo_covid19_patients_csv():
           + '（前日比：' + plus + '{:.2f}'.format(compare_mean_seven) + '人）')
     print(graph)
     result = {
-        'text': day + '現在\n' +'新規陽性者数：' + str(new_number) + '人\n' + '7日間移動平均：' + '{:.2f}'.format(last_mean_seven)
-                + '人' + '（前日比：' + plus + '{:.2f}'.format(compare_mean_seven) + '人）\n\n' + '![](' + graph + ')' + '\n\n',
+        'text': day + '現在\n\n' +'新規陽性者数: ' + str(new_number) + '人\n\n' + '7日間移動平均: ' + '{:.2f}'.format(last_mean_seven)
+                + '人' + '（前日比: ' + plus + '{:.2f}'.format(compare_mean_seven) + '人）\n\n' + '![](' + graph + ')' + '\n\n',
         'display': 1,
     }
     return jsonify(result)
