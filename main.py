@@ -105,5 +105,5 @@ def get_tokyo_covid19_patients_csv():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=False, host='0.0.0.0')
     # get_tokyo_covid19_patients_csv()
